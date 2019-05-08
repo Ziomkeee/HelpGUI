@@ -1,0 +1,8 @@
+name: HelpGUI
+version: 1.0.0
+description: Create your own infinite GUI with information for players or make up your own
+author: Ziomkeee
+website: https://github.com/Ziomkeee/HelpGUI
+
+main: pl.marketdesign.helpgui.help
+api-version: 1.13

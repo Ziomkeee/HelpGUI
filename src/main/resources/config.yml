@@ -1,0 +1,32 @@
+# HelpGUI
+# Please report bugs here: https://github.com/Ziomkeee/HelpGUI/issues
+# How to configure a plugin: https://github.com/Ziomkeee/HelpGUI/wiki
+
+#Actions section
+#%open%GUI_name - opens another GUI
+#%send%message - sends a message to the player
+#%cmd%command - execute console command
+#%player% - player name
+actions:
+  first:
+    permission: helpgui.first
+    execute:
+    - '%open%otherName'
+    - '%send%&7Hey %player%!'
+  second:
+    permission: helpgui.second
+    execute:
+    - '%open%otherName'
+    - '%send%&7Hey %player%!'
+
+#Command opening the main gui
+cmd: "help"
+
+#Language section
+#%name% refers to the name of the GUI being loaded when the plugin is enabled / restarted
+MSG:
+  prefix: "&7[&6&lHelpGUI] "
+  noperm: "&cYou don't have access to this action!"
+  notexist: "&cThis GUI does not exist, please contact the administrator!"
+  actionnotexist: "&cThis actions does not exist, please contact the administrator!"
+  load: "GUI %name% has been loaded"
