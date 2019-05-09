@@ -15,3 +15,11 @@ GUI:
       lore:
       - '&aHey!'
       action: "first"
+    2:
+      material: "cobblestone"
+      amount: 2
+      enchant: false
+      name: "&a&lExample"
+      lore:
+      - '&aHey :)!'
+      action: "none"

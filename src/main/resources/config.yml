@@ -5,7 +5,8 @@
 #Actions section
 #%open%GUI_name - opens another GUI
 #%send%message - sends a message to the player
-#%cmd%command - execute console command
+#%cmd-player%command - execute command by player
+#cmd-console%command - execute command by console
 #%player% - player name
 actions:
   first:

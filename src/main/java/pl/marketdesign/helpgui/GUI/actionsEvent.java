@@ -30,6 +30,9 @@ public class actionsEvent implements Listener {
             for(String slot : cfg.getMainGUI().getConfigurationSection("GUI.items").getKeys(false)) {
                 ConfigurationSection config = cfg.getMainGUI().getConfigurationSection("GUI.items."+slot);
                 if(e.getSlot() == Integer.parseInt(slot)) {
+                    if(config.getString("action").equalsIgnoreCase("none")) {
+                        return;
+                    }
                     String action = "actions." + config.getString("action");
                     getAction(p, action);
                 }
@@ -48,6 +51,9 @@ public class actionsEvent implements Listener {
                 for(String slot : cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items").getKeys(false)) {
                     ConfigurationSection config = cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items."+slot);
                     if(e.getSlot() == Integer.parseInt(slot)) {
+                        if(config.getString("action").equalsIgnoreCase("none")) {
+                            return;
+                        }
                         String action = "actions." + config.getString("action");
                         getAction(p, action);
                     }
@@ -68,9 +74,12 @@ public class actionsEvent implements Listener {
                         } else {
                             p.sendMessage(util.lang.get("prefix") + util.lang.get("notexist"));
                         }
-                    } else if(execute.contains("%cmd%")) {
+                    } else if(execute.contains("%cmd-console%")) {
                         //Execute command by console
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), execute.replace("%cmd%", "").replace("%player%", p.getName()));
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), execute.replace("%cmd-console%", "").replace("%player%", p.getName()));
+                    } else if(execute.contains("%cmd-player%")) {
+                        //Execute command by player
+                        Bukkit.dispatchCommand(p, execute.replace("%cmd-player%", "").replace("%player%", p.getName()));
                     } else if(execute.contains("%send%")) {
                         //Send message to player
                         p.sendMessage(util.getColor(execute.replace("%send%", "").replace("%player%", p.getName())));
