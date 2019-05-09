@@ -30,6 +30,7 @@ public class actionsEvent implements Listener {
             for(String slot : cfg.getMainGUI().getConfigurationSection("GUI.items").getKeys(false)) {
                 ConfigurationSection config = cfg.getMainGUI().getConfigurationSection("GUI.items."+slot);
                 if(e.getSlot() == Integer.parseInt(slot)) {
+                    //None
                     if(config.getString("action").equalsIgnoreCase("none")) {
                         return;
                     }
@@ -51,6 +52,7 @@ public class actionsEvent implements Listener {
                 for(String slot : cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items").getKeys(false)) {
                     ConfigurationSection config = cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items."+slot);
                     if(e.getSlot() == Integer.parseInt(slot)) {
+                        //None
                         if(config.getString("action").equalsIgnoreCase("none")) {
                             return;
                         }

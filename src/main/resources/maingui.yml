@@ -19,7 +19,7 @@ GUI:
       material: "cobblestone"
       amount: 2
       enchant: false
-      name: "&a&lExample"
+      name: "&a&lExample none"
       lore:
       - '&aHey :)!'
       action: "none"

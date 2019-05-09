@@ -10,7 +10,7 @@
 #%player% - player name
 actions:
   first:
-    permission: helpgui.first
+    permission: helpgui.firstt
     execute:
     - '%open%otherName'
     - '%send%&7Hey %player%!'
