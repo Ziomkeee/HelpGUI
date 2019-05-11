@@ -18,11 +18,11 @@ import static pl.marketdesign.helpgui.help.cfg;
 
 public class loadGUI {
 
-    public static Inventory mainInv = Bukkit.createInventory(null, cfg.getMainGUI().getInt("GUI.size"), util.getColor(cfg.getMainGUI().getString("GUI.name")));
-    public static HashMap<String, Inventory> otherGUI = new HashMap<String, Inventory>();
+    public static HashMap<String, Inventory> listGUI = new HashMap<String, Inventory>();
 
     //Load items for MainGUI
     public static void loadMainGUI() {
+        Inventory mainInv = Bukkit.createInventory(null, cfg.getMainGUI().getInt("GUI.size"), util.getColor(cfg.getMainGUI().getString("GUI.name")));
         for(String slot : cfg.getMainGUI().getConfigurationSection("GUI.items").getKeys(false)) {
             ConfigurationSection config = cfg.getMainGUI().getConfigurationSection("GUI.items."+slot);
             String material = config.getString("material").toUpperCase();
@@ -41,6 +41,7 @@ public class loadGUI {
             item.setItemMeta(meta);
             mainInv.setItem(Integer.parseInt(slot), item);
         }
+        listGUI.put("mainGUI", mainInv);
         System.out.println(help.prefix + cfg.getConfig().getString("MSG.load").replace("%name%", "MainGUI"));
     }
 
@@ -68,7 +69,7 @@ public class loadGUI {
                 item.setItemMeta(meta);
                 inv.setItem(Integer.parseInt(slot), item);
             }
-            otherGUI.put(name, inv);
+            listGUI.put(name, inv);
             System.out.println(help.prefix + cfg.getConfig().getString("MSG.load").replace("%name%", name));
         }
     }

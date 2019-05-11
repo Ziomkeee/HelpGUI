@@ -14,7 +14,7 @@ public class cmd extends BukkitCommand {
     @Override
     public boolean execute(CommandSender sender, String s, String[] strings) {
         Player p = (Player) sender;
-        p.openInventory(loadGUI.mainInv);
+        p.openInventory(loadGUI.listGUI.get("mainGUI"));
         return false;
     }
 

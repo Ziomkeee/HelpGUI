@@ -3,24 +3,42 @@
 # How to configure a plugin: https://github.com/Ziomkeee/HelpGUI/wiki
 
 #Actions section
-#%open%GUI_name - opens another GUI
-#%send%message - sends a message to the player
-#%cmd-player%command - execute command by player
-#%cmd-console%command - execute command by console
-#%teleport%world:x:y:z - teleport to a new location
-#%give%item:amount - gives item to inventory
-#%player% - player name
+#Check https://github.com/Ziomkeee/HelpGUI/wiki/Actions
 actions:
-  first:
-    permission: helpgui.firstt
+  open:
+    permission: helpgui.open
     execute:
-    - '%open%otherName'
-    - '%send%&7Hey %player%!'
-  second:
-    permission: helpgui.second
+    - '%open%otherGUI'
+  send:
+    permission: helpgui.send
     execute:
-    - '%open%otherName'
-    - '%send%&7Hey %player%!'
+    - '%send%Hey %player%!'
+  executePlayer:
+    permission: helpgui.execute
+    execute:
+    - '%cmd-player%msg %player% hey!'
+  executeConsole:
+    permission: helpgui.execute
+    execute:
+    - '%cmd-console%say Hey %player%!'
+  teleport:
+    permission: helpgui.teleport
+    execute:
+    - '%teleport%world:10:100:10'
+  give:
+    permission: helpgui.give
+    execute:
+    - '%give%stone:10'
+  remove:
+    permission: helpgui.remove
+    execute:
+    - '%remove%stone:10'
+  close:
+    permission: helpgui.close
+    execute:
+    - '%remove%stone:10'
+    - '%close%'
+
 
 #Command opening the main gui
 cmd: "help"
@@ -31,6 +49,7 @@ MSG:
   prefix: "&7[&6&lHelpGUI] "
   noperm: "&cYou don't have access to this action!"
   notexist: "&cThis GUI does not exist, please contact the administrator!"
+  noitem: "&cYou do not have enough items!"
   actionnotexist: "&cThis actions does not exist, please contact the administrator!"
   load: "GUI %name% has been loaded"
   reload: "&aConfiguration reloaded!"

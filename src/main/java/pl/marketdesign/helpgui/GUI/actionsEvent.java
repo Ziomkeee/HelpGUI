@@ -23,7 +23,7 @@ public class actionsEvent implements Listener {
     public void getActions(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         //MainGUI
-        if(e.getInventory().equals(loadGUI.mainInv)) {
+        if(e.getInventory().equals(loadGUI.listGUI.get("mainGUI"))) {
             e.setCancelled(true);
             if(e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.DOUBLE_CLICK || e.getClick() == ClickType.DROP) {
                 e.setCancelled(true);
@@ -41,26 +41,27 @@ public class actionsEvent implements Listener {
                     getAction(p, action);
                 }
             }
-        }
-
-        //OthersGUI
-        for(Map.Entry<String, Inventory> inv : loadGUI.otherGUI.entrySet()) {
-            if(e.getInventory().equals(inv.getValue())) {
-                e.setCancelled(true);
-                if(e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.DOUBLE_CLICK || e.getClick() == ClickType.DROP) {
+        } else {
+            //OthersGUI
+            for(Map.Entry<String, Inventory> inv : loadGUI.listGUI.entrySet()) {
+                if(e.getInventory().equals(inv.getValue())) {
                     e.setCancelled(true);
-                    p.closeInventory();
-                    p.updateInventory();
-                }
-                for(String slot : cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items").getKeys(false)) {
-                    ConfigurationSection config = cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items."+slot);
-                    if(e.getSlot() == Integer.parseInt(slot)) {
-                        //None
-                        if(config.getString("action").equalsIgnoreCase("none")) {
-                            return;
+                    if(e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.DOUBLE_CLICK || e.getClick() == ClickType.DROP) {
+                        e.setCancelled(true);
+                        p.closeInventory();
+                        p.updateInventory();
+                    }
+                    for(String slot : cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items").getKeys(false)) {
+                        ConfigurationSection config = cfg.getOtherGUI().getConfigurationSection("GUI."+inv.getKey()+".items."+slot);
+
+                        if(e.getSlot() == Integer.parseInt(slot)) {
+                            //None
+                            if(config.getString("action").equalsIgnoreCase("none")) {
+                                return;
+                            }
+                            String action = "actions." + config.getString("action");
+                            getAction(p, action);
                         }
-                        String action = "actions." + config.getString("action");
-                        getAction(p, action);
                     }
                 }
             }
@@ -74,8 +75,8 @@ public class actionsEvent implements Listener {
                     if(execute.contains("%open%")) {
                         //Open new Inventory
                         String GUI = execute.replace("%open%", "");
-                        if(loadGUI.otherGUI.get(GUI) != null) {
-                            p.openInventory(loadGUI.otherGUI.get(GUI));
+                        if(loadGUI.listGUI.get(GUI) != null) {
+                            p.openInventory(loadGUI.listGUI.get(GUI));
                         } else {
                             p.sendMessage(util.lang.get("prefix") + util.lang.get("notexist"));
                         }
@@ -88,27 +89,40 @@ public class actionsEvent implements Listener {
                     } else if(execute.contains("%send%")) {
                         //Send message to player
                         p.sendMessage(util.getColor(execute.replace("%send%", "").replace("%player%", p.getName())));
-                    } else if (execute.contains("%give%")) {
+                    } else if(execute.contains("%give%")) {
                         String[] material = execute.replace("%give%", "").split(":");
                         String item = material[0].toUpperCase();
                         int amount = Integer.parseInt(material[1]);
                         ItemStack giveitem = new ItemStack(Material.getMaterial(item), amount);
-                        p.getInventory().addItem(new ItemStack[] { giveitem });
-                    }
-                    else if (execute.contains("%teleport%"))
+                        p.getInventory().addItem(giveitem);
+                    } else if(execute.contains("%remove%")) {
+                        String[] material = execute.replace("%remove%", "").split(":");
+                        String item = material[0].toUpperCase();
+                        int amount = Integer.parseInt(material[1]);
+                        if(p.getInventory().containsAtLeast(new ItemStack(Material.getMaterial(item), amount),amount)) {
+                            p.getInventory().removeItem(new ItemStack(Material.getMaterial(item), amount));
+                        } else {
+                            p.sendMessage(util.lang.get("prefix") + util.lang.get("noitem"));
+                            p.closeInventory();
+                        }
+                    } else if(execute.contains("%teleport%"))
                     {
                         String[] teleport = execute.replace("%teleport%", "").split(":");
 
                         Location newloc = new Location(Bukkit.getWorld(teleport[0]), Double.parseDouble(teleport[1]),
                                 Double.parseDouble(teleport[2]), Double.parseDouble(teleport[3]));
                         p.teleport(newloc);
+                    } else if(execute.contains("%close%")) {
+                        p.closeInventory();
                     }
                 }
             } else {
                 p.sendMessage(util.lang.get("prefix") + util.lang.get("noperm"));
+                p.closeInventory();
             }
         } else {
             p.sendMessage(util.lang.get("prefix") + util.lang.get("actionnotexist"));
+            p.closeInventory();
         }
     }
 }

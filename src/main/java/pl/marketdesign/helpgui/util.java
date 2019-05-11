@@ -19,6 +19,7 @@ public class util {
         lang.put("notexist", getColor(cfg.getConfig().getString("MSG.notexist")));
         lang.put("actionnotexist", getColor(cfg.getConfig().getString("MSG.actionnotexist")));
         lang.put("reload", getColor(cfg.getConfig().getString("MSG.reload")));
+        lang.put("noitem", getColor(cfg.getConfig().getString("MSG.noitem")));
     }
 
 }

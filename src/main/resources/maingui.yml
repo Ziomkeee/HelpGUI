@@ -1,25 +1,73 @@
-# HelpGUI v1.0.0
+# HelpGUI v1.0.3
 #
 # Please report bugs here: https://github.com/Ziomkeee/HelpGUI/issues
 # How to configure a plugin: https://github.com/Ziomkeee/HelpGUI/wiki
 #
 GUI:
-  name: "Name GUI"
+  name: "Name GUI v2"
   size: 54
   items:
-    1:
-      material: "stone"
+    0:
+      material: "crafting_table"
       amount: 1
       enchant: true
-      name: "&a&lExample"
+      name: "&a&lOpen"
       lore:
-      - '&aHey!'
-      action: "first"
+      - '&aOpen'
+      action: "open"
     2:
-      material: "cobblestone"
-      amount: 2
+      material: "crafting_table"
+      amount: 1
       enchant: false
-      name: "&a&lExample none"
+      name: "&a&lSend"
       lore:
-      - '&aHey :)!'
-      action: "none"
+      - '&aSend'
+      action: "send"
+    4:
+      material: "crafting_table"
+      amount: 1
+      enchant: false
+      name: "&a&lExecute by Player"
+      lore:
+      - '&aExecute'
+      action: "executePlayer"
+    6:
+      material: "crafting_table"
+      amount: 1
+      enchant: false
+      name: "&a&lExecute by Console"
+      lore:
+      - '&aExecute'
+      action: "executeConsole"
+    8:
+      material: "crafting_table"
+      amount: 1
+      enchant: false
+      name: "&a&lTeleport"
+      lore:
+      - '&ateleport'
+      action: "teleport"
+    10:
+      material: "crafting_table"
+      amount: 1
+      enchant: false
+      name: "&a&lGive"
+      lore:
+      - '&aGive'
+      action: "give"
+    12:
+      material: "crafting_table"
+      amount: 1
+      enchant: false
+      name: "&a&lRemove"
+      lore:
+      - '&aRemove'
+      action: "remove"
+    14:
+      material: "crafting_table"
+      amount: 1
+      enchant: false
+      name: "&a&lClose"
+      lore:
+      - '&aClose'
+      action: "close"

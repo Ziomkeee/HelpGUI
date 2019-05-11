@@ -16,8 +16,8 @@ public class helpguicmd implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("helpgui")) {
             if(sender.hasPermission("helpgui.reload")) {
                 cfg.reloadConfiguration();
+                loadGUI.listGUI.clear();
                 loadGUI.loadMainGUI();
-                loadGUI.otherGUI.clear();
                 loadGUI.loadOtherGUI();
                 util.lang.clear();
                 util.loadLang();
