@@ -47,4 +47,10 @@ public class config {
     public FileConfiguration getConfig() {
         return config;
     }
+
+    public void reloadConfiguration() {
+        this.config = YamlConfiguration.loadConfiguration(this.configFile);
+        this.mainGUI = YamlConfiguration.loadConfiguration(this.mainGUIFile);
+        this.otherGUI = YamlConfiguration.loadConfiguration(this.otherGUIFile);
+    }
 }

@@ -1,6 +1,8 @@
 package pl.marketdesign.helpgui.GUI;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import pl.marketdesign.helpgui.util;
 
 import java.util.Map;
@@ -85,6 +88,20 @@ public class actionsEvent implements Listener {
                     } else if(execute.contains("%send%")) {
                         //Send message to player
                         p.sendMessage(util.getColor(execute.replace("%send%", "").replace("%player%", p.getName())));
+                    } else if (execute.contains("%give%")) {
+                        String[] material = execute.replace("%give%", "").split(":");
+                        String item = material[0].toUpperCase();
+                        int amount = Integer.parseInt(material[1]);
+                        ItemStack giveitem = new ItemStack(Material.getMaterial(item), amount);
+                        p.getInventory().addItem(new ItemStack[] { giveitem });
+                    }
+                    else if (execute.contains("%teleport%"))
+                    {
+                        String[] teleport = execute.replace("%teleport%", "").split(":");
+
+                        Location newloc = new Location(Bukkit.getWorld(teleport[0]), Double.parseDouble(teleport[1]),
+                                Double.parseDouble(teleport[2]), Double.parseDouble(teleport[3]));
+                        p.teleport(newloc);
                     }
                 }
             } else {

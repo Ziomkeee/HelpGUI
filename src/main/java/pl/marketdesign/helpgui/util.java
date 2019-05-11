@@ -18,6 +18,7 @@ public class util {
         lang.put("noperm", getColor(cfg.getConfig().getString("MSG.noperm")));
         lang.put("notexist", getColor(cfg.getConfig().getString("MSG.notexist")));
         lang.put("actionnotexist", getColor(cfg.getConfig().getString("MSG.actionnotexist")));
+        lang.put("reload", getColor(cfg.getConfig().getString("MSG.reload")));
     }
 
 }

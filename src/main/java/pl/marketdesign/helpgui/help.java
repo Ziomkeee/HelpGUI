@@ -5,6 +5,8 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.marketdesign.helpgui.GUI.actionsEvent;
 import pl.marketdesign.helpgui.GUI.loadGUI;
+import pl.marketdesign.helpgui.cmd.cmd;
+import pl.marketdesign.helpgui.cmd.helpguicmd;
 
 import java.lang.reflect.Field;
 
@@ -22,6 +24,7 @@ public class help extends JavaPlugin {
         loadGUI.loadOtherGUI();
 
         regCmd();
+        getCommand("helpgui").setExecutor(new helpguicmd());
         getServer().getPluginManager().registerEvents(new actionsEvent(), this);
 
     }

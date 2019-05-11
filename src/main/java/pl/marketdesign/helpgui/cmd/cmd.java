@@ -1,4 +1,4 @@
-package pl.marketdesign.helpgui;
+package pl.marketdesign.helpgui.cmd;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;

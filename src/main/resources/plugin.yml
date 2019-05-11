@@ -1,8 +1,13 @@
 name: HelpGUIPlus
-version: 1.0.1
+version: 1.0.2
 description: Create your own infinite GUI with information for players or make up your own
 author: Ziomkeee
 website: https://github.com/Ziomkeee/HelpGUI
 
 main: pl.marketdesign.helpgui.help
 api-version: 1.13
+commands:
+  helpgui:
+    aliases: [guihelp, helpguiplus, hgp]
+    description: reload plugin
+    permission: helpgui.reload

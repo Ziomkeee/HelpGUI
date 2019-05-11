@@ -6,7 +6,9 @@
 #%open%GUI_name - opens another GUI
 #%send%message - sends a message to the player
 #%cmd-player%command - execute command by player
-#cmd-console%command - execute command by console
+#%cmd-console%command - execute command by console
+#%teleport%world:x:y:z - teleport to a new location
+#%give%item:amount - gives item to inventory
 #%player% - player name
 actions:
   first:
@@ -31,3 +33,4 @@ MSG:
   notexist: "&cThis GUI does not exist, please contact the administrator!"
   actionnotexist: "&cThis actions does not exist, please contact the administrator!"
   load: "GUI %name% has been loaded"
+  reload: "&aConfiguration reloaded!"
